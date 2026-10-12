@@ -1,0 +1,65 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10000000000000000000001 /* hi3d-GemGardenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000001 /* hi3d-GemGardenApp.swift */; };
+		A10000000000000000000002 /* hi3d-GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000002 /* hi3d-GameView.swift */; };
+		A10000000000000000000003 /* hi3d-LocalProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000003 /* hi3d-LocalProgress.swift */; };
+		A10000000000000000000004 /* hi3d-GameAssets in Resources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000005 /* hi3d-GameAssets */; };
+		A10000000000000000000005 /* hi3d-Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000006 /* hi3d-Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A20000000000000000000001 /* hi3d-GemGardenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "hi3d-GemGardenApp.swift"; sourceTree = "<group>"; };
+		A20000000000000000000002 /* hi3d-GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "hi3d-GameView.swift"; sourceTree = "<group>"; };
+		A20000000000000000000003 /* hi3d-LocalProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "hi3d-LocalProgress.swift"; sourceTree = "<group>"; };
+		A20000000000000000000004 /* hi3d-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "hi3d-Info.plist"; sourceTree = "<group>"; };
+		A20000000000000000000005 /* hi3d-GameAssets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "hi3d-GameAssets"; sourceTree = "<group>"; };
+		A20000000000000000000006 /* hi3d-Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "hi3d-Assets.xcassets"; sourceTree = "<group>"; };
+		A20000000000000000000007 /* GemGarden.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GemGarden.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A30000000000000000000001 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A40000000000000000000001 = {isa = PBXGroup; children = (A40000000000000000000002 /* iOS */, A40000000000000000000003 /* Products */); sourceTree = "<group>"; };
+		A40000000000000000000002 /* iOS */ = {isa = PBXGroup; children = (A20000000000000000000001 /* hi3d-GemGardenApp.swift */, A20000000000000000000002 /* hi3d-GameView.swift */, A20000000000000000000003 /* hi3d-LocalProgress.swift */, A20000000000000000000004 /* hi3d-Info.plist */, A20000000000000000000005 /* hi3d-GameAssets */, A20000000000000000000006 /* hi3d-Assets.xcassets */); name = iOS; path = ""; sourceTree = "<group>"; };
+		A40000000000000000000003 /* Products */ = {isa = PBXGroup; children = (A20000000000000000000007 /* GemGarden.app */); name = Products; sourceTree = "<group>"; };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A50000000000000000000001 /* GemGarden */ = {isa = PBXNativeTarget; buildConfigurationList = A80000000000000000000002 /* Build configuration list for PBXNativeTarget "GemGarden" */; buildPhases = (A60000000000000000000001 /* Sources */, A30000000000000000000001 /* Frameworks */, A70000000000000000000001 /* Resources */); buildRules = (); dependencies = (); name = GemGarden; productName = GemGarden; productReference = A20000000000000000000007 /* GemGarden.app */; productType = "com.apple.product-type.application"; };
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A90000000000000000000001 /* Project object */ = {isa = PBXProject; attributes = {BuildIndependentTargetsInParallel = 1; LastUpgradeCheck = 2660; TargetAttributes = {A50000000000000000000001 = {CreatedOnToolsVersion = 26.0; LastSwiftMigration = 1500; ProvisioningStyle = Automatic; }; }; }; buildConfigurationList = A80000000000000000000001 /* Build configuration list for PBXProject "GemGarden" */; compatibilityVersion = "Xcode 14.0"; developmentRegion = zh-Hans; hasScannedForEncodings = 0; knownRegions = (zh-Hans, en, Base); mainGroup = A40000000000000000000001; productRefGroup = A40000000000000000000003 /* Products */; projectDirPath = ""; projectRoot = ""; targets = (A50000000000000000000001 /* GemGarden */); };
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A70000000000000000000001 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (A10000000000000000000004 /* hi3d-GameAssets in Resources */, A10000000000000000000005 /* hi3d-Assets.xcassets in Resources */); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A60000000000000000000001 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A10000000000000000000001 /* hi3d-GemGardenApp.swift in Sources */, A10000000000000000000002 /* hi3d-GameView.swift in Sources */, A10000000000000000000003 /* hi3d-LocalProgress.swift in Sources */); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AA0000000000000000000001 /* Debug */ = {isa = XCBuildConfiguration; buildSettings = {ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; IPHONEOS_DEPLOYMENT_TARGET = 16.0; SDKROOT = iphoneos; SWIFT_VERSION = 5.0; }; name = Debug; };
+		AA0000000000000000000002 /* Release */ = {isa = XCBuildConfiguration; buildSettings = {ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; IPHONEOS_DEPLOYMENT_TARGET = 16.0; SDKROOT = iphoneos; SWIFT_VERSION = 5.0; }; name = Release; };
+		AA0000000000000000000003 /* Debug */ = {isa = XCBuildConfiguration; buildSettings = {ASSETCATALOG_COMPILER_APPICON_NAME = "hi3d-AppIcon"; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = "hi3d-Info.plist"; MARKETING_VERSION = 1.0.0; PRODUCT_BUNDLE_IDENTIFIER = com.pengchengluoyi.gemgarden; PRODUCT_NAME = "$(TARGET_NAME)"; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = 1; }; name = Debug; };
+		AA0000000000000000000004 /* Release */ = {isa = XCBuildConfiguration; buildSettings = {ASSETCATALOG_COMPILER_APPICON_NAME = "hi3d-AppIcon"; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = "hi3d-Info.plist"; MARKETING_VERSION = 1.0.0; PRODUCT_BUNDLE_IDENTIFIER = com.pengchengluoyi.gemgarden; PRODUCT_NAME = "$(TARGET_NAME)"; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = 1; }; name = Release; };
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A80000000000000000000001 /* Build configuration list for PBXProject "GemGarden" */ = {isa = XCConfigurationList; buildConfigurations = (AA0000000000000000000001 /* Debug */, AA0000000000000000000002 /* Release */); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		A80000000000000000000002 /* Build configuration list for PBXNativeTarget "GemGarden" */ = {isa = XCConfigurationList; buildConfigurations = (AA0000000000000000000003 /* Debug */, AA0000000000000000000004 /* Release */); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+/* End XCConfigurationList section */
+	};
+	rootObject = A90000000000000000000001 /* Project object */;
+}

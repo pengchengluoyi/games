@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f6f4ed">
+  <meta name="description" content="拾光消消：一款不赶时间的 3D 宝石消除游戏。交换、连锁，给自己一点轻松的时间。">
+  <title>拾光消消 · 给自己一点轻松的时间</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%239180bd'/%3E%3Cpath d='M14 25 23 15h18l9 10-18 25Z' fill='%23f6ecff'/%3E%3Cpath d='m14 25 18 25 18-25M23 15l-3 10 12 25 12-25-3-10M14 25h36' fill='none' stroke='%239180bd' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./hi3d-style.css">
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
+</head>
+<body>
+  <svg class="icon-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
+    <symbol id="icon-gem" viewBox="0 0 24 24"><path d="m3 8 4-5h10l4 5-9 13Z"/><path d="M3 8h18M7 3l-1 5 6 13 6-13-1-5"/></symbol>
+    <symbol id="icon-sound" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4ZM15 8a6 6 0 0 1 0 8M18 5a10 10 0 0 1 0 14"/></symbol>
+    <symbol id="icon-muted" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4ZM16 9l5 6M21 9l-5 6"/></symbol>
+    <symbol id="icon-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 4 2c-1.5 1-1.5 1-1.5 3M12 17h.01"/></symbol>
+    <symbol id="icon-hint" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M8 14a6 6 0 1 1 8 0c-1 1-1 2-1 2H9s0-1-1-2ZM12 1v1M3 4l1 1M20 5l1-1M1 11h1M22 11h1"/></symbol>
+    <symbol id="icon-hammer" viewBox="0 0 24 24"><path d="m9 4 3-3 9 9-3 3ZM12 10l-8 8a2.1 2.1 0 0 0 3 3l8-8"/></symbol>
+    <symbol id="icon-shuffle" viewBox="0 0 24 24"><path d="M3 6h3c5 0 7 12 12 12h3M18 15l3 3-3 3M3 18h3c2 0 4-3 6-6s4-6 6-6h3M18 3l3 3-3 3"/></symbol>
+    <symbol id="icon-reset" viewBox="0 0 24 24"><path d="M3 10a9 9 0 1 1 1 7M3 4v6h6"/></symbol>
+    <symbol id="icon-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+    <symbol id="icon-play" viewBox="0 0 24 24"><path d="m8 4 12 8-12 8Z"/></symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol>
+    <symbol id="icon-cup" viewBox="0 0 24 24"><path d="M7 3h10v7a5 5 0 0 1-10 0ZM7 5H3v3a4 4 0 0 0 4 4M17 5h4v3a4 4 0 0 1-4 4M12 15v5M7 21h10"/></symbol>
+    <symbol id="icon-leaf" viewBox="0 0 24 24"><path d="M20 3C10 2 3 5 4 13c1 7 12 9 16-10ZM4 20 15 9"/></symbol>
+  </defs></svg>
+
+  <div class="ambient ambient-one" aria-hidden="true"></div><div class="ambient ambient-two" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="./hi3d-index.html" aria-label="拾光消消首页"><span class="brand-mark"><svg><use href="#icon-gem"/></svg></span><span><strong>拾光消消<span class="brand-dot">.</span></strong><small>GEM GARDEN</small></span></a>
+    <button class="life-pill" id="lives-button" aria-label="生命值与恢复说明"><span aria-hidden="true">♥</span><b id="lives-count">5</b><small id="lives-timer">已满</small></button>
+    <div class="header-tools"><button id="levels-button" class="icon-button" aria-label="关卡地图" title="关卡地图"><svg><use href="#icon-cup"/></svg></button><button id="sound-button" class="icon-button" aria-label="打开音效" title="打开音效"><svg><use href="#icon-muted"/></svg></button><button id="help-button" class="icon-button" aria-label="玩法说明" title="玩法说明"><svg><use href="#icon-help"/></svg></button></div>
+  </header>
+
+  <main class="home-screen" id="home-screen" aria-label="闯关首页">
+    <section class="home-intro"><span class="home-kicker">A LITTLE JOY, EVERY DAY</span><h1>让快乐，<br>一关一关<span>生长。</span></h1><p>交换宝石，融化冰层。<br>把闲暇的片刻，变成满树的星星。</p><div class="home-local">✧ 本机保存 · 无需联网</div><div class="home-rules">失败消耗 1 颗 ♥<br>每 30 分钟恢复 1 颗，最多 5 颗</div></section>
+    <section class="journey-card"><div class="journey-heading"><div><small>第一章 · 宝石花园</small><h2>你的关卡树 <span>♧</span></h2></div><span id="journey-progress">0 / 15</span></div>
+      <div class="tree-scroll" id="tree-scroll" tabindex="0" aria-label="可上下滑动的关卡树"><div class="level-tree" id="level-tree"></div></div>
+      <div class="home-bottom"><p id="home-caption">从第一颗星星开始</p><button class="primary-button" id="home-play">开始第 1 关 <svg><use href="#icon-arrow"/></svg></button><small id="home-save-note">关卡、星级与生命值自动保存在这台设备</small></div>
+    </section>
+  </main>
+
+  <main class="game-layout hidden" id="game-screen">
+    <aside class="intro-panel">
+      <div class="eyebrow"><span></span> 给大脑放个小假</div>
+      <h1>拾起宝石，<br>放下<span>匆忙。</span></h1>
+      <p class="intro-copy">一点思考，一点好运。<br>让小小的消除，装满轻松的时光。</p>
+      <div class="mode-description" id="mode-description"><span class="tiny-leaf"><svg><use href="#icon-leaf"/></svg></span><div><strong>不赶时间，慢慢来</strong><p>没有倒计时，也没有失败。</p></div></div>
+      <div class="howto-card"><span class="card-kicker">简单三步，就能上手</span><div class="howto-step"><span>01</span><p>点击两颗相邻宝石，交换位置</p></div><div class="howto-step"><span>02</span><p>横竖连成 3 颗相同宝石即可消除</p></div><div class="howto-step"><span>03</span><p>连成 4 / 5 颗，发现特别的惊喜</p></div><div class="mini-gems" aria-hidden="true"><i class="mini-gem green"></i><i class="mini-gem green"></i><i class="mini-gem green"></i><span>✦</span></div></div>
+      <div class="little-note"><span>✧</span> 有时候，慢一点也很好。</div>
+    </aside>
+
+    <section class="play-panel" aria-label="3D 宝石棋盘">
+      <div class="board-heading"><div><span class="live-dot"></span><span id="board-label">自在花园</span><span class="board-badge" id="level-label">随心玩</span></div><button id="pause-button" class="icon-button small" aria-label="暂停游戏" title="暂停游戏" disabled><svg><use href="#icon-pause"/></svg></button></div>
+      <div class="mobile-hud" id="mobile-hud"><div class="move-counter"><span id="hud-moves">22</span><small id="hud-moves-label">剩余步数</small></div><div class="hud-main"><div class="hud-caption"><strong id="hud-goal-title">本关目标</strong><span class="hud-score">得分 <b id="hud-score">0</b></span></div><div class="goal-chips" id="hud-goals"></div><div class="hud-stars" id="hud-stars" aria-label="星级进度"><span>★</span><span>★</span><span>★</span><i id="hud-star-copy">消除、连锁，收集星星</i></div></div></div>
+      <div class="board-viewport" id="board-viewport">
+      <div class="board-stage" id="board-stage">
+        <canvas id="game-canvas" tabindex="0" role="application" aria-label="消消乐棋盘。点击或滑动交换；键盘方向键移动，回车选择。"></canvas>
+        <div class="loading-cover" id="loading-cover"><span class="loading-gem">◇</span><p>正在唤醒小宝石…</p></div>
+        <div class="board-overlay hidden" id="welcome-overlay"><div class="welcome-card"><span class="welcome-kicker">A LITTLE MOMENT FOR YOU</span><h2>来，放松一下。</h2><p id="welcome-copy">交换小宝石，收集好心情。</p><button class="primary-button" id="start-button">开始拾光 <svg><use href="#icon-arrow"/></svg></button><span class="welcome-note">不用下载 · 没有倒计时</span></div></div>
+        <div class="board-overlay hidden" id="pause-overlay"><div class="welcome-card"><span class="pause-illustration">☁</span><h2>歇一小会儿。</h2><p>宝石会在这里等你。</p><button class="primary-button" id="resume-button"><svg><use href="#icon-play"/></svg>继续拾光</button></div></div>
+        <div class="combo-pop hidden" id="combo-pop" aria-live="polite"><strong>连锁 ×2</strong><span>好事连连</span></div>
+        <div class="score-pop-container" id="score-pop-container" aria-hidden="true"></div>
+        <div class="fatal-error hidden" id="fatal-error"><strong>3D 棋盘暂时无法显示</strong><p id="error-copy"></p><button class="primary-button" id="reload-button">重新加载</button></div>
+        <div id="accessible-board" class="sr-only" role="grid" aria-label="键盘可操作的宝石棋盘"></div>
+      </div>
+      </div>
+      <div class="board-footer"><span id="status-text" role="status">你的轻松时刻，即将开始</span><span class="view-indicator">✧ 真正的 3D 小世界</span></div>
+      <div class="game-tools"><button id="hint-button" class="tool-button" disabled><svg><use href="#icon-hint"/></svg><span>提示<small>找一对宝石</small></span><kbd>H</kbd></button><button id="hammer-button" class="tool-button" disabled aria-pressed="false"><svg class="hammer-tool" aria-hidden="true"><use href="#icon-hammer"/></svg><span>小木槌<small id="hammer-note">剩余 3 次</small></span></button><button id="shuffle-button" class="tool-button" disabled><svg><use href="#icon-shuffle"/></svg><span>洗牌<small id="shuffle-note">重新排列</small></span></button><button id="restart-button" class="tool-button"><svg><use href="#icon-reset"/></svg><span>放弃<small>回到关卡树</small></span></button></div>
+    </section>
+
+    <aside class="stats-panel">
+      <section class="score-card"><div class="stat-caption"><span>收集的快乐</span><span class="score-spark">✦</span></div><strong class="score-value" id="score-value">0</strong><span class="score-unit">POINTS</span><div class="best-row"><svg><use href="#icon-cup"/></svg><span>最好的一次</span><strong id="best-value">0</strong></div></section>
+      <section class="goal-card"><div class="goal-heading"><span id="goal-title">今天的小目标</span><span>✧</span></div><div class="desktop-goals" id="desktop-goals"></div><div class="goal-numbers" id="goal-numbers"><strong id="goal-current">0</strong><span>/ <span id="goal-target">2,000</span></span></div><div class="progress-track" role="progressbar" aria-label="目标进度" aria-valuemin="0" aria-valuemax="2000" aria-valuenow="0" id="goal-progress"><span id="progress-fill"></span></div><p id="goal-copy">一颗一颗，慢慢积攒就好。</p><div class="moves-row hidden" id="moves-row"><span>剩余步数</span><strong id="moves-value">24</strong></div></section>
+      <section class="special-card"><div class="goal-heading">偶遇小惊喜 <span>＋</span></div><div class="special-row"><span class="special-symbol stripe">≋</span><div><strong>4 颗连线</strong><p>一整行或列，一起消除</p></div></div><div class="special-row"><span class="special-symbol burst">✹</span><div><strong>T / L 形相遇</strong><p>周围九宫格，绽放一下</p></div></div><div class="special-row"><span class="special-symbol prism">✦</span><div><strong>5 颗连线</strong><p>彩虹宝石，消除同一种颜色</p></div></div></section>
+      <div class="save-note"><span class="save-dot"></span> 进度自动留在这台设备</div>
+    </aside>
+  </main>
+  <footer class="site-footer"><span>MADE FOR YOUR LITTLE BREAK</span><span>慢慢玩，也是一种生活。<i>✧</i></span><button id="reduce-motion-button">轻柔动效：<span id="motion-label">关</span></button></footer>
+  <div class="toast hidden" id="toast" role="status"></div>
+
+  <div class="modal-backdrop hidden" id="dialog-backdrop"><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title"><button id="dialog-close" class="icon-button dialog-close" aria-label="关闭"><svg><use href="#icon-close"/></svg></button><span class="dialog-mark" id="dialog-mark">✧</span><h2 id="dialog-title"></h2><div id="dialog-content"></div><div class="dialog-actions" id="dialog-actions"></div></section></div>
+  <script id="boot-script" type="module" src="./hi3d-game.js"></script>
+  <script>
+    document.getElementById('boot-script').addEventListener('error', function () {
+      document.getElementById('loading-cover').classList.add('hidden');
+      document.getElementById('home-screen').classList.add('hidden');
+      document.getElementById('game-screen').classList.remove('hidden');
+      document.getElementById('fatal-error').classList.remove('hidden');
+      document.getElementById('error-copy').textContent = '必要的游戏资源未能加载。请保留完整游戏文件夹，再通过网页预览打开，或重新加载重试。';
+      document.body.dataset.gameState = 'error';
+      document.getElementById('reload-button').onclick = function () { location.reload(); };
+    });
+  </script>
+</body>
+</html>
